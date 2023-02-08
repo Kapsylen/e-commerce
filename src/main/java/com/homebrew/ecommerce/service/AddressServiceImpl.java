@@ -4,18 +4,14 @@ package com.homebrew.ecommerce.service;
 import com.homebrew.ecommerce.domain.AddressApi;
 import com.homebrew.ecommerce.infrastructure.AddressRepository;
 import com.homebrew.ecommerce.util.AddressTransformer;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-
+@AllArgsConstructor
 public class AddressServiceImpl implements AddressService {
 
     private AddressRepository addressRepository;
-
-    public AddressServiceImpl(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
-    }
-
 
     @Override
     public AddressApi getAddress(String id) {

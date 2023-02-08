@@ -14,11 +14,6 @@ public class AddressController {
 
     private AddressServiceImpl addressService;
 
-    @GetMapping("/customer/{id}/address")
-    @ResponseStatus(value = HttpStatus.OK)
-    public AddressApi getAddress(@PathVariable String id) {
-        return addressService.getAddress(id);
-    }
     @PostMapping("/addresses")
     @ResponseStatus(value = HttpStatus.CREATED)
     public void addAddress(@RequestBody AddressApi addressApi) {
