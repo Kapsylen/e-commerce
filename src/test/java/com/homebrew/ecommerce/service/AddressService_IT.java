@@ -28,7 +28,7 @@ public class AddressService_IT {
     }
 
     @Test
-    public void ShouldGetAddress_GivenIdWereFound() {
+    public void ShouldSaveAddress() {
         var addressApi = AddressApi.builder()
                 .city(UUID.randomUUID().toString())
                 .zipCode(TestData.randomNumber())

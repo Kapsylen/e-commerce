@@ -23,6 +23,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customers")
+    @ResponseStatus(value = HttpStatus.CREATED)
     public void addCustomer(@RequestBody CustomerApi customerApi) {
         customerService.saveCustomer(customerApi);
     }
@@ -33,6 +34,7 @@ public class CustomerController {
         customerService.deleteCustomer(id);
     }
     @GetMapping("/customers")
+    @ResponseStatus(value = HttpStatus.OK)
     public List<CustomerApi> getAllCustomers() {
        return customerService.getCustomers();
     }
