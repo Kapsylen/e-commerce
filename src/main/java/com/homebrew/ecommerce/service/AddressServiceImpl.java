@@ -6,8 +6,6 @@ import com.homebrew.ecommerce.infrastructure.AddressRepository;
 import com.homebrew.ecommerce.util.AddressTransformer;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 
 public class AddressServiceImpl implements AddressService {

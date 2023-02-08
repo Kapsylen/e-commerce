@@ -1,12 +1,9 @@
 package com.homebrew.ecommerce.infrastructure.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 
 @Getter
@@ -14,11 +11,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 public class Address {
-
     @Id
     private String id;
     private String street;
-    private int number;
+    private Integer number;
     private String city;
-    private int zipCode;
+    private Integer zipCode;
 }
