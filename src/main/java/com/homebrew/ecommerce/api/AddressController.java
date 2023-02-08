@@ -7,20 +7,21 @@ import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("api")
+
+@RestController("/addresses")
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddressController {
 
     private AddressServiceImpl addressService;
 
-    @PostMapping("/addresses")
+    @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public void addAddress(@RequestBody AddressApi addressApi) {
         addressService.saveAddress(addressApi);
     }
 
-    @DeleteMapping("/customer/{id}/address")
+    @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void deleteAddress(@PathVariable String id) {
         addressService.deleteAddress(id);

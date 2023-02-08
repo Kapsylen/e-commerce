@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("api/customers")
+@RestController
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerController {
 
     private CustomerServiceImpl customerService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/customers/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public CustomerApi getCustomer(@PathVariable String id) {
        return customerService.getCustomer(id);
     }
 
-    @PostMapping
+    @PostMapping("/customers")
     public void addCustomer(@RequestBody CustomerApi customerApi) {
         customerService.saveCustomer(customerApi);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/customer/delete/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void deleteCustomer(@PathVariable String id) {
         customerService.deleteCustomer(id);
     }
-    @GetMapping
+    @GetMapping("/customers")
     public List<CustomerApi> getAllCustomers() {
        return customerService.getCustomers();
     }
