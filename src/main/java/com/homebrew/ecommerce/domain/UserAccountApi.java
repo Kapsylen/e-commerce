@@ -4,7 +4,6 @@ import lombok.Builder;
 
 @Builder
 public record UserAccountApi(
-        String userId,
         CustomerApi customerApi,
         String email,
         String password

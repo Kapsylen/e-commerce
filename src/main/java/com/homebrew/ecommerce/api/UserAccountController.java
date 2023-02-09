@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@NoArgsConstructor
 @AllArgsConstructor
 public class UserAccountController {
 
@@ -30,5 +31,11 @@ public class UserAccountController {
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void deleteUserAccount(@PathVariable String id) {
         userAccountService.deleteUserAccount(id);
+    }
+
+    @GetMapping("/useraccounts")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<UserAccountApi> getAllUserAccounts() {
+        return userAccountService.getAllUserAccounts();
     }
 }

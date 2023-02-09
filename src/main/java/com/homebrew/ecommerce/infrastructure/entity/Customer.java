@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "customers")
 public class Customer {
     @Id
@@ -18,11 +19,4 @@ public class Customer {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-
-    public Customer(String id, String firstName, String lastName, String ssn) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.ssn = ssn;
-    }
 }
