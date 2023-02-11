@@ -4,7 +4,8 @@ import lombok.Builder;
 
 @Builder
 public record ProductApi(
-        String productId,
+
+        String id,
         String name,
         int quantity
 ) {

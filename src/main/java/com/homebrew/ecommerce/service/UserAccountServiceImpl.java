@@ -20,9 +20,6 @@ import static com.homebrew.ecommerce.util.UserAccountTransformer.toUserAccountAp
 public class UserAccountServiceImpl implements UserAccountService {
 
     private UserAccountRepository userAccountRepository;
-    private CustomerRepository customerRepository;
-
-    private AddressRepository addressRepository;
     @Override
     public UserAccountApi getUserAccount(String id) {
         return toUserAccountApi(userAccountRepository.findById(id).get());

@@ -14,16 +14,16 @@ public class CustomerController {
 
     private CustomerServiceImpl customerService;
 
-    @GetMapping("/customers/{id}")
+    @GetMapping("/customers/{customerId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public CustomerApi getCustomer(@PathVariable String id) {
-       return customerService.getCustomer(id);
+    public CustomerApi getCustomer(@PathVariable String customerId) {
+       return customerService.getCustomer(customerId);
     }
 
-    @DeleteMapping("/customer/delete/{id}")
+    @DeleteMapping("/customer/delete/{customerId}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void deleteCustomer(@PathVariable String id) {
-        customerService.deleteCustomer(id);
+    public void deleteCustomer(@PathVariable String customerId) {
+        customerService.deleteCustomer(customerId);
     }
     @GetMapping("/customers")
     @ResponseStatus(value = HttpStatus.OK)

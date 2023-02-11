@@ -1,10 +1,9 @@
 package com.homebrew.ecommerce.service;
 
-import com.homebrew.ecommerce.domain.AddressApi;
 import com.homebrew.ecommerce.domain.UserAccountApi;
 import com.homebrew.ecommerce.infrastructure.UserAccountRepository;
+import com.homebrew.ecommerce.infrastructure.entity.UserAccount;
 import com.homebrew.ecommerce.util.TestData;
-import com.homebrew.ecommerce.util.UserAccountTransformer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,29 @@ public class UserAccountService_IT {
                 .build();
         userAccountService.saveUserAccount(userAccountApi);
 
-        var userAccount = repository.findAll();
-        assertThat(userAccount).isNotNull();
+        var userAccount = repository.findAll().get(0);
+
+        assertThat(userAccount)
+                .extracting(
+                        UserAccount::getEmail,
+                        UserAccount::getPassword,
+                        field -> field.getCustomer().getFirstName(),
+                        field -> field.getCustomer().getLastName(),
+                        field -> field.getCustomer().getSsn(),
+                        field -> field.getCustomer().getAddress().getStreet(),
+                        field -> field.getCustomer().getAddress().getNumber().toString(),
+                        field -> field.getCustomer().getAddress().getZipCode().toString(),
+                        field -> field.getCustomer().getAddress().getCity()
+                ).containsExactly(
+                        userAccountApi.email(),
+                        userAccountApi.password(),
+                        userAccountApi.customerApi().firstName(),
+                        userAccountApi.customerApi().lastName(),
+                        userAccountApi.customerApi().ssn(),
+                        userAccountApi.customerApi().addressApi().street(),
+                        userAccountApi.customerApi().addressApi().number().toString(),
+                        userAccountApi.customerApi().addressApi().zipCode().toString(),
+                        userAccountApi.customerApi().addressApi().city()
+                );
     }
 }

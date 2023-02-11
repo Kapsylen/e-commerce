@@ -1,5 +1,6 @@
 package com.homebrew.ecommerce.infrastructure.entity;
 
+import com.homebrew.ecommerce.domain.ShoppingCart;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "orders")
 public class Order {
     @Id
@@ -27,5 +27,13 @@ public class Order {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product product;
+    private ShoppingCart shoppingCart;
+
+    public Order(String id, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, UserAccount userAccount, ShoppingCart shoppingCart) {
+        this.id = id;
+        this.createdDateTime = createdDateTime;
+        this.updatedDateTime = updatedDateTime;
+        this.userAccount = userAccount;
+        this.shoppingCart = shoppingCart;
+    }
 }

@@ -5,7 +5,7 @@ import lombok.Builder;
 @Builder
 public record AddressApi(
    String street,
-   int number,
+   Integer number,
    String city,
-   int zipCode
+   Integer zipCode
 ) {}

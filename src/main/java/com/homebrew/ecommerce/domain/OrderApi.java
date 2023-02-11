@@ -7,5 +7,7 @@ import java.time.LocalDateTime;
 public record OrderApi(
         String orderId,
         LocalDateTime created,
-        LocalDateTime updated
+        LocalDateTime updated,
+        String userAccountId,
+        String shoppingCartId
 ) {}
