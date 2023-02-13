@@ -26,7 +26,7 @@ public class CustomerController {
         customerService.saveCustomer(customerApi);
     }
 
-    @DeleteMapping("/customer/delete/{customerId}")
+    @DeleteMapping("/customers/delete/{customerId}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void deleteCustomer(@PathVariable String customerId) {
         customerService.deleteCustomer(customerId);

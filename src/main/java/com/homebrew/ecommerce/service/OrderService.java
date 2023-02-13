@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderService {
     OrderApi getOrder(String id);
-    void saveOrder(OrderApi orderApi);
+    String saveOrder(OrderApi orderApi);
     void deleteOrder(String id);
     List<OrderApi> getAllOrders();
 }

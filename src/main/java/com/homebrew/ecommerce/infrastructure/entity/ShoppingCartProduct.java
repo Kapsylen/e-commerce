@@ -10,10 +10,10 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "products")
-public class Product {
+@Entity(name = "shopping_cart_product")
+public class ShoppingCartProduct {
     @Id
     private String id;
     private String name;
-    private String brand;
+    private Integer quantity;
 }

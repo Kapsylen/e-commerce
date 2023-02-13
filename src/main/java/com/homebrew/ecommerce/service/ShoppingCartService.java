@@ -1,11 +1,11 @@
 package com.homebrew.ecommerce.service;
 
-import com.homebrew.ecommerce.domain.ProductApi;
-import com.homebrew.ecommerce.domain.ShoppingCartApi;
+import com.homebrew.ecommerce.domain.response.ShoppingCartId;
+import com.homebrew.ecommerce.domain.response.ShoppingCartProductsApi;
 
 public interface ShoppingCartService {
-    void addProductIntoShoppingCart(String shoppingCartId, ProductApi productApi);
+    ShoppingCartId addProductIntoShoppingCart(ShoppingCartProductsApi shoppingCartProductsApi);
     void deleteShoppingCart(String shoppingCartId);
     void deleteProductInShoppingCart(String shoppingCartId, String productId);
-    ShoppingCartApi getShoppingCart(String shoppingCartId);
+    ShoppingCartProductsApi getShoppingCart(String shoppingCartId);
 }

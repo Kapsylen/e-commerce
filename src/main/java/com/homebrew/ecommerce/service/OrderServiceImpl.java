@@ -23,11 +23,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void saveOrder(OrderApi orderApi) {
+    public String saveOrder(OrderApi orderApi) {
         var userAccount = userAccountRepository.findById(orderApi.userAccountId()).get();
         var shoppingCart = shoppingCartRepository.findById(orderApi.shoppingCartId()).get();
         var order = OrderTransformer.toOrder(orderApi, userAccount, shoppingCart);
-        orderRepository.save(order);
+        return orderRepository.save(order).getId();
     }
 
     @Override

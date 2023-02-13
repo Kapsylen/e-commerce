@@ -1,6 +1,8 @@
 package com.homebrew.ecommerce.api;
 
 import com.homebrew.ecommerce.domain.ProductApi;
+import com.homebrew.ecommerce.domain.response.ProductId;
+import com.homebrew.ecommerce.domain.response.ProductsApi;
 import com.homebrew.ecommerce.service.ProductServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,23 +24,17 @@ public class ProductController {
 
     @GetMapping("/products")
     @ResponseStatus(value = HttpStatus.OK)
-    public List<ProductApi> getProducts() {
+    public ProductsApi getProducts() {
         return productService.getProducts();
-    }
-
-    @PostMapping("/product")
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public void addProduct(@RequestBody ProductApi productApi) {
-        productService.saveProduct(productApi);
     }
 
     @PostMapping("/products")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void addProducts(@RequestBody List<ProductApi> products) {
-        productService.saveAllProducts(products);
+    public List<ProductId> addProducts(@RequestBody ProductsApi products) {
+        return productService.saveAllProducts(products);
     }
 
-    @DeleteMapping("/product/{productId}")
+    @DeleteMapping("/products/{productId}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void deleteProduct(@PathVariable String productId) {
         productService.deleteProduct(productId);

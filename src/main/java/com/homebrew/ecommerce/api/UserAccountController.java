@@ -1,6 +1,7 @@
 package com.homebrew.ecommerce.api;
 
 import com.homebrew.ecommerce.domain.UserAccountApi;
+import com.homebrew.ecommerce.domain.response.UserAccountId;
 import com.homebrew.ecommerce.service.UserAccountServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ public class UserAccountController {
 
     private UserAccountServiceImpl userAccountService;
 
-    @GetMapping("/useraccount/{userAccountId}")
+    @GetMapping("/useraccounts/{userAccountId}")
     @ResponseStatus(value = HttpStatus.OK)
     public UserAccountApi getUserAccount(@PathVariable String userAccountId) {
         return userAccountService.getUserAccount(userAccountId);
@@ -22,11 +23,11 @@ public class UserAccountController {
 
     @PostMapping("/useraccounts")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void addUserAccount(@RequestBody UserAccountApi userAccountApi) {
-        userAccountService.saveUserAccount(userAccountApi);
+    public UserAccountId addUserAccount(@RequestBody UserAccountApi userAccountApi) {
+        return userAccountService.saveUserAccount(userAccountApi);
     }
 
-    @DeleteMapping("/useraccount/{userAccountId}")
+    @DeleteMapping("/useraccounts/{userAccountId}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void deleteUserAccount(@PathVariable String userAccountId) {
         userAccountService.deleteUserAccount(userAccountId);

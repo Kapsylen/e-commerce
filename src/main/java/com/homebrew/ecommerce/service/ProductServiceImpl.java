@@ -1,6 +1,8 @@
 package com.homebrew.ecommerce.service;
 
 import com.homebrew.ecommerce.domain.ProductApi;
+import com.homebrew.ecommerce.domain.response.ProductId;
+import com.homebrew.ecommerce.domain.response.ProductsApi;
 import com.homebrew.ecommerce.infrastructure.ProductRepository;
 import com.homebrew.ecommerce.infrastructure.entity.Product;
 import com.homebrew.ecommerce.util.ProductTransformer;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.homebrew.ecommerce.util.ProductTransformer.toProduct;
 import static com.homebrew.ecommerce.util.ProductTransformer.toProductApi;
 
 @Service
@@ -22,19 +25,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductApi> getProducts() {
-        return productRepository.findAll().stream().map(ProductTransformer::toProductApi).toList();
+    public ProductsApi getProducts() {
+        return ProductsApi.builder().productApis(productRepository.findAll().stream().map(ProductTransformer::toProductApi).toList()).build();
     }
 
     @Override
-    public void saveProduct(ProductApi productApi) {
-        productRepository.save(ProductTransformer.toProduct(productApi));
+    public ProductId saveProduct(ProductApi productApi) {
+        return ProductId.builder().productId(productRepository.save(toProduct(productApi)).getId()).build();
     }
 
     @Override
-    public void saveAllProducts(List<ProductApi> productApis) {
-        List<Product> products = productApis.stream().map(ProductTransformer::toProduct).toList();
-        productRepository.saveAll(products);
+    public List<ProductId> saveAllProducts(ProductsApi productApis) {
+        List<Product> products = productApis.productApis().stream().map(ProductTransformer::toProduct).toList();
+        return productRepository.saveAll(products).stream().map(ProductTransformer::toProductId).toList();
     }
 
     @Override

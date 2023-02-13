@@ -1,7 +1,6 @@
 package com.homebrew.ecommerce.infrastructure.entity;
 
 import com.homebrew.ecommerce.domain.ShoppingCart;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,7 +25,7 @@ public class Order {
     private UserAccount userAccount;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id")
     private ShoppingCart shoppingCart;
 
     public Order(String id, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, UserAccount userAccount, ShoppingCart shoppingCart) {

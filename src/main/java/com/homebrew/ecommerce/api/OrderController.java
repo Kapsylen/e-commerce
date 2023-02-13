@@ -19,7 +19,7 @@ public class OrderController {
 
     @PostMapping("/orders")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void addOrder(@RequestBody OrderApi orderApi) {
-        orderService.saveOrder(orderApi);
+    public String addOrder(@RequestBody OrderApi orderApi) {
+        return orderService.saveOrder(orderApi);
     }
 }

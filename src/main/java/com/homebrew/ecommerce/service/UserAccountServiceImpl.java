@@ -1,10 +1,8 @@
 package com.homebrew.ecommerce.service;
 
 import com.homebrew.ecommerce.domain.UserAccountApi;
-import com.homebrew.ecommerce.infrastructure.AddressRepository;
-import com.homebrew.ecommerce.infrastructure.CustomerRepository;
+import com.homebrew.ecommerce.domain.response.UserAccountId;
 import com.homebrew.ecommerce.infrastructure.UserAccountRepository;
-import com.homebrew.ecommerce.util.CustomerTransformer;
 import com.homebrew.ecommerce.util.UserAccountTransformer;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,8 +24,8 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public void saveUserAccount(UserAccountApi userAccountApi) {
-        userAccountRepository.save(toUserAccount(userAccountApi));
+    public UserAccountId saveUserAccount(UserAccountApi userAccountApi) {
+        return UserAccountId.builder().userAccountId(userAccountRepository.save(toUserAccount(userAccountApi)).getId()).build();
     }
 
     @Override
