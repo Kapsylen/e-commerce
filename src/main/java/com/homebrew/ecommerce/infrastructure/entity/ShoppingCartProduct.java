@@ -15,5 +15,6 @@ public class ShoppingCartProduct {
     @Id
     private String id;
     private String name;
+    private String brand;
     private Integer quantity;
 }

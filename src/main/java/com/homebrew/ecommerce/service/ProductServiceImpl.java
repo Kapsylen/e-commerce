@@ -25,8 +25,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductsApi getProducts() {
-        return ProductsApi.builder().productApis(productRepository.findAll().stream().map(ProductTransformer::toProductApi).toList()).build();
+    public List<ProductApi> getProducts() {
+        return productRepository.findAll().stream().map(ProductTransformer::toProductApi).toList();
     }
 
     @Override

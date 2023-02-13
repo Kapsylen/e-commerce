@@ -19,13 +19,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCartId addProductIntoShoppingCart(ShoppingCartProductsApi shoppingCartProductsApi) {
         if (shoppingCartProductsApi.shoppingCartId() == null) {
-            var shoppingCart = new ShoppingCart(UUID.randomUUID().toString(), shoppingCartProductsApi.productApiList().stream().map(ShoppingCartProductTransformer::toShoppingCartProduct).toList());
+            var shoppingCart = new ShoppingCart(UUID.randomUUID().toString(), shoppingCartProductsApi.productApis().stream().map(ShoppingCartProductTransformer::toShoppingCartProducts).toList());
             shoppingCartRepository.save(shoppingCart);
             return ShoppingCartId.builder().shoppingCartId(shoppingCart.getId()).build();
         }
         var shoppingCart = shoppingCartRepository.findById(shoppingCartProductsApi.shoppingCartId());
         if (shoppingCart.isPresent()) {
-            shoppingCart.get().getShoppingCartProducts().addAll(shoppingCartProductsApi.productApiList().stream().map(ShoppingCartProductTransformer::toShoppingCartProduct).toList());
+            shoppingCart.get().getShoppingCartProducts().addAll(shoppingCartProductsApi.productApis().stream().map(ShoppingCartProductTransformer::toShoppingCartProducts).toList());
             shoppingCartRepository.save(shoppingCart.get());
             return ShoppingCartId.builder().shoppingCartId(shoppingCart.get().getId()).build();
         } else {
@@ -35,17 +35,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void deleteShoppingCart(String shoppingCartId) {
-        var shoppingCart = shoppingCartRepository.findById(shoppingCartId).get();
-        if (shoppingCart != null) {
-            shoppingCartRepository.delete(shoppingCart);
+        var shoppingCart = shoppingCartRepository.findById(shoppingCartId);
+        if (shoppingCart.isPresent()) {
+            shoppingCartRepository.deleteById(shoppingCartId);
         }
     }
 
     @Override
     public void deleteProductInShoppingCart(String shoppingCartId, String productId) {
-        var shoppingCart = shoppingCartRepository.findById(shoppingCartId).get();
-        if (shoppingCart != null) {
-            shoppingCart.getShoppingCartProducts().removeIf(p -> p.getId().equals(productId));
+        var shoppingCart = shoppingCartRepository.findById(shoppingCartId);
+        if (shoppingCart.isPresent()) {
+            shoppingCart.get().getShoppingCartProducts().removeIf(p -> p.getId().equals(productId));
+            shoppingCartRepository.save(shoppingCart.get());
         }
     }
 

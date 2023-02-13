@@ -10,6 +10,7 @@ public class ProductTransformer {
 
     public static ProductApi toProductApi(Product product) {
         return ProductApi.builder()
+                .id(product.getId())
                 .name(product.getName())
                 .brand(product.getBrand())
                 .build();

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
     ProductApi getProduct(String id);
-    ProductsApi getProducts();
+    List<ProductApi> getProducts();
     ProductId saveProduct(ProductApi productApi);
     List<ProductId> saveAllProducts(ProductsApi productsApi);
     void deleteProduct(String id);
