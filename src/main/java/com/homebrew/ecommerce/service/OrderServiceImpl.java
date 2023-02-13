@@ -31,12 +31,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(String id) {
-
+    public void deleteOrder(String orderId) {
+        orderRepository.deleteById(orderId);
     }
 
     @Override
     public List<OrderApi> getAllOrders() {
-        return null;
+        return orderRepository.findAll().stream().map(OrderTransformer::toOrderApi).toList();
     }
 }

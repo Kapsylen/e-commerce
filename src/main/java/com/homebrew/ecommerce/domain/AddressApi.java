@@ -4,8 +4,9 @@ import lombok.Builder;
 
 @Builder
 public record AddressApi(
-   String street,
-   Integer number,
-   String city,
-   Integer zipCode
-) {}
+        String street,
+        Integer number,
+        String city,
+        Integer zipCode
+) {
+}

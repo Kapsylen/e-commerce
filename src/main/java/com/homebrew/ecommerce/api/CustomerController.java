@@ -20,6 +20,12 @@ public class CustomerController {
        return customerService.getCustomer(customerId);
     }
 
+    @PostMapping("/customers")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void addCustomer(@RequestBody CustomerApi customerApi) {
+        customerService.saveCustomer(customerApi);
+    }
+
     @DeleteMapping("/customer/delete/{customerId}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void deleteCustomer(@PathVariable String customerId) {
